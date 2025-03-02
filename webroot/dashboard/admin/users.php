@@ -97,7 +97,6 @@ function getRole($role) {
             <tr>
                 <th>UID</th>
                 <th>Username</th>
-                <th>Display Name</th>
                 <th>Email</th>
                 <th>Discord ID</th>
                 <th>IP</th>
