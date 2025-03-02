@@ -81,10 +81,10 @@ function checkDiscordLink($id) {
     <link rel="icon" href="/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="/dashboard/assets/main.css?v=<?php echo filemtime('/home/xytriza-upload/htdocs/upload.xytriza.com/dashboard/assets/main.css'); ?>">
+    <link rel="stylesheet" href="/dashboard/assets/main.css?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.css'); ?>">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/dashboard/assets/main.js?v=<?php echo filemtime('/home/xytriza-upload/htdocs/upload.xytriza.com/dashboard/assets/main.js'); ?>"></script>
+    <script src="/dashboard/assets/main.js?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.js'); ?>"></script>
 </head>
 <body>
     <div id="notification-container"></div>
