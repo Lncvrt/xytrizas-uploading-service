@@ -23,7 +23,7 @@ $stmt->bind_result($uid, $displayname, $username, $email, $api_key, $discord_id,
 $stmt->fetch();
 $stmt->close();
 
-$displayname = htmlspecialchars($displayname, ENT_QUOTES, 'UTF-8');
+$displayname = htmlspecialchars($displayname, ENT_QUOTES, 'UTF-8') ?? $username;
 
 $conn->close();
 
