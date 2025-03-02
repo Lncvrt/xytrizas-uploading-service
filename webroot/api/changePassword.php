@@ -2,9 +2,9 @@
 require '../config/config.php';
 require '../incl/main.php';
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$old_password = isset($_POST['oldpassword']) ? $_POST['oldpassword'] : '';
-$new_password = isset($_POST['newpassword']) ? $_POST['newpassword'] : '';
+$username = $_POST['username'] ?? '';
+$old_password = $_POST['oldpassword'] ?? '';
+$new_password = $_POST['newpassword'] ?? '';
 
 if (empty($username) || empty($old_password) || empty($new_password)) {
     http_response_code(400);
@@ -57,7 +57,6 @@ if ($result->num_rows > 0) {
     http_response_code(404);
     die(json_encode(['success' => 'false', 'response' => 'User not found']));
 }
-
 $stmt->close();
 $conn->close();
 ?>

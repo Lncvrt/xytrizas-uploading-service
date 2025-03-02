@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$apikey = isset($_SERVER['HTTP_KEY']) ? $_SERVER['HTTP_KEY'] : '';
+$apikey = $_SERVER['HTTP_KEY'] ?? '';
 
 if (isset($apikey) && empty($apikey)) {
     $response = [
@@ -47,7 +47,4 @@ if ($result->num_rows > 0) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-
-$stmt->close();
-$conn->close();
 ?>

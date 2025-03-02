@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : '';
+$session = $_COOKIE['session'] ?? '';
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE session = ?");
 $stmt->bind_param("s", $session);

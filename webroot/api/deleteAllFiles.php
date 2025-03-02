@@ -18,8 +18,8 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$key = isset($_SERVER['HTTP_KEY']) ? $_SERVER['HTTP_KEY'] : '';
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : '';
+$key = $_SERVER['HTTP_KEY'] ?? '';
+$session = $_COOKIE['session'] ?? '';
 
 if (!empty($key)) {
     $sql = "SELECT uid FROM users WHERE api_key = ?";
@@ -88,5 +88,4 @@ if ($result->num_rows > 0) {
 
 header('Content-Type: application/json');
 echo json_encode($response);
-
 ?>

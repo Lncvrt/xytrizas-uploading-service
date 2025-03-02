@@ -2,10 +2,10 @@
 require '../config/config.php';
 require '../incl/main.php';
 
-$old_displayname = isset($_POST['olddisplayname']) ? $_POST['olddisplayname'] : '';
-$new_displayname = isset($_POST['newdisplayname']) ? $_POST['newdisplayname'] : '';
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
+$old_displayname = $_POST['olddisplayname'] ?? '';
+$new_displayname = $_POST['newdisplayname'] ?? '';
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ??'';
 
 if (empty($username) || empty($old_displayname) || empty($new_displayname) || empty($password)) {
     http_response_code(400);
@@ -17,7 +17,6 @@ if (strlen($new_displayname) < 3 || strlen($new_displayname) > 32) {
     http_response_code(400);
     header('Content-Type: application/json');
     die(json_encode(['success' => 'false', 'responsae' => 'New Display Name must be between 3 and 32 characters']));
-    exit;
 }
 
 $conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
@@ -56,7 +55,6 @@ if ($result->num_rows > 0) {
     header('Content-Type: application/json');
     die(json_encode(['success' => 'false', 'response' => 'User not found']));
 }
-
 $stmt->close();
 $conn->close();
 ?>

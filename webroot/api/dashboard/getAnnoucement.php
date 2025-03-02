@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : '';
+$session = $_COOKIE['session'] ?? '';
 
 if (isset($session) && empty($session)) {
     $response = [

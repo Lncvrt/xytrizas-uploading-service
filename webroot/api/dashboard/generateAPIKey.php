@@ -23,7 +23,7 @@ function generateRandomString($length) {
     return $randomString;
 }
 
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : '';
+$session = $_COOKIE['session'] ?? '';
 
 if (isset($session) && empty($session)) {
     $response = [
@@ -64,7 +64,4 @@ if ($result->num_rows > 0) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-
-$stmt->close();
-$conn->close();
 ?>

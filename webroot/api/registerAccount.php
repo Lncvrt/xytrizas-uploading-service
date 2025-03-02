@@ -4,7 +4,7 @@ require '../incl/main.php';
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
-$token = isset($_POST['captcha_token']) ? $_POST['captcha_token'] : '';
+$token = $_POST['captcha_token'] ?? '';
 
 $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
@@ -62,10 +62,10 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$request_username = isset($_POST['username']) ? $_POST['username'] : '';
+$request_username = $_POST['username'] ?? '';
 $request_displayname = (isset($_POST['displayname']) && !empty($_POST['displayname'])) ? $_POST['displayname'] : $request_username;
-$request_password = isset($_POST['password']) ? $_POST['password'] : '';
-$request_email = isset($_POST['email']) ? $_POST['email'] : '';
+$request_password = $_POST['password'] ?? '';
+$request_email = $_POST['email'] ?? '';
 
 if (empty($request_username) || empty($request_password) || empty($request_email)) {
     $response = [
@@ -235,8 +235,6 @@ if ($result->num_rows > 0) {
     http_response_code(200);
     echo json_encode($response);
 }
-
 $stmt->close();
 $conn->close();
-
 ?>

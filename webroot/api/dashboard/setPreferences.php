@@ -15,12 +15,12 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$apiKey = isset($_POST['key']) ? $_POST['key'] : null;
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : null;
-$country = isset($_POST['country']) ? $_POST['country'] : null;
-$timezone = isset($_POST['timezone']) ? $_POST['timezone'] : null;
-$dateformat = isset($_POST['dateformat']) ? $_POST['dateformat'] : null;
-$timeformat = isset($_POST['timeformat']) ? $_POST['timeformat'] : null;
+$apiKey = $_POST['key'] ?? null;
+$session = $_COOKIE['session'] ?? null;
+$country = $_POST['country'] ?? null;
+$timezone = $_POST['timezone'] ?? null;
+$dateformat = $_POST['dateformat'] ?? null;
+$timeformat = $_POST['timeformat'] ?? null;
 
 $query = "UPDATE users SET ";
 $params = [];
@@ -31,7 +31,6 @@ if ($country !== null) {
     if (!in_array($country, $countries)) {
         $country = null;
         die('{"success": false, "response": "Invalid country" }');
-        return;
     }
 
     $query .= "country = ?, ";
@@ -141,7 +140,4 @@ if ($stmt->execute()) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-$stmt->close();
-
-$stmt->close();
-$conn->close();
+?>

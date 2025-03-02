@@ -4,7 +4,7 @@ require '../incl/main.php';
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
-$token = isset($_POST['captcha_token']) ? $_POST['captcha_token'] : '';
+$token = $_POST['captcha_token'] ?? '';
 
 $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
@@ -130,8 +130,6 @@ if ($result->num_rows > 0) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-
 $stmt->close();
 $conn->close();
-
 ?>

@@ -15,8 +15,8 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$apikey = isset($_SERVER['HTTP_KEY']) ? $_SERVER['HTTP_KEY'] : '';
-$fileid = isset($_SERVER['HTTP_FILEID']) ? $_SERVER['HTTP_FILEID'] : '';
+$apikey = $_SERVER['HTTP_KEY'] ?? '';
+$fileid = $_SERVER['HTTP_FILEID'] ?? '';
 
 if (empty($apikey) || empty($fileid)) {
     $response = [
@@ -82,7 +82,4 @@ if ($result->num_rows > 0) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-
-$stmt->close();
-$conn->close();
 ?>

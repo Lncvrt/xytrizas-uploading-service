@@ -15,12 +15,12 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$apiKey = isset($_POST['key']) ? $_POST['key'] : null;
-$session = isset($_COOKIE['session']) ? $_COOKIE['session'] : null;
-$password = null;//isset($_POST['password']) ? $_POST['password'] : null;
-$spoiler = isset($_POST['spoiler']) ? $_POST['spoiler'] : null;
-$filename = isset($_POST['filename']) ? $_POST['filename'] : null;
-$fileId = isset($_POST['fileId']) ? $_POST['fileId'] : null;
+$apiKey = $_POST['key'] ?? null;
+$session = $_COOKIE['session'] ?? null;
+$password = null;//$_POST['password'] ?? null;
+$spoiler = $_POST['spoiler'] ?? null;
+$filename = $_POST['filename'] ?? null;
+$fileId = $_POST['fileId'] ?? null;
 
 $query = "UPDATE uploads SET ";
 $params = [];
@@ -87,3 +87,4 @@ if ($password !== null || $filename !== null) {
 
 header('Content-Type: application/json');
 die(json_encode($response));
+?>

@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die(json_encode($response));
 }
 
-$key = isset($_SERVER['HTTP_KEY']) ? $_SERVER['HTTP_KEY'] : '';
+$key = $_SERVER['HTTP_KEY'] ?? '';
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE api_key = ?");
 $stmt->bind_param("s", $key);
