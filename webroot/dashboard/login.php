@@ -156,7 +156,7 @@ if (isset($_COOKIE['session'])) {
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAARIYQd110ap2OR-" data-callback="javascriptCallback"></div>
+            <div class="cf-turnstile" data-sitekey="<?= $captcha_sitekey ?>" data-callback="javascriptCallback"></div>
             <button type="submit" id="btn" style="margin-bottom: 5px;">Login</button>
         </form>
         <a id="btn" href="/dashboard/register.php">Don't have an account?</a>
@@ -165,7 +165,7 @@ if (isset($_COOKIE['session'])) {
         let captcha_token = ''
         window.onloadTurnstileCallback = function () {
             turnstile.render('.cf-turnstile', {
-                sitekey: '0x4AAAAAAARIYQd110ap2OR-',
+                sitekey: '<?= $captcha_sitekey ?>',
                 callback: function(token) {
                     captcha_token = token
                 },
@@ -199,7 +199,7 @@ if (isset($_COOKIE['session'])) {
                         alert(response.response + ' (' + xhr.status + ')');
                         captcha_token = '';
                         turnstile.render('.cf-turnstile', {
-                            sitekey: '0x4AAAAAAARIYQd110ap2OR-',
+                            sitekey: '<?= $captcha_sitekey ?>',
                             callback: function(token) {
                                 captcha_token = token
                             },

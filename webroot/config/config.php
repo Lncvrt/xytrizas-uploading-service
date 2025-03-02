@@ -15,8 +15,6 @@ $discordClientId = "";
 $discordClientSecret = "";
 $discordRedirectUri = "";
 
-if (empty($dbservername) || empty($dbusername) || empty($dbpassword) || empty($dbname) || empty($googleProjectId) || empty($googleBucketName) || empty($googleKeyFilePath)) {
-    http_response_code(500);
-    die("Please check your config file (are all fields filled in?)");
-}
+$captcha_secretkey = "";
+$captcha_sitekey = "";
 ?>

@@ -9,15 +9,15 @@ $token = $_POST['captcha_token'] ?? '';
 $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 $data = [
-    'secret'    => '0x4AAAAAAARIYYLl4IlaAeS9Q40g-Y6QZ9M',
-    'response'  => $token,
-    'remoteip'  => $ip,
+    'secret' => $captcha_secretkey,
+    'response' => $token,
+    'remoteip' => $ip,
 ];
 
 $options = [
     'http' => [
-        'header'  => 'Content-type: application/x-www-form-urlencoded',
-        'method'  => 'POST',
+        'header' => 'Content-type: application/x-www-form-urlencoded',
+        'method' => 'POST',
         'content' => http_build_query($data),
     ],
 ];
