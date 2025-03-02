@@ -424,11 +424,17 @@ input:checked~.icon-times {
 .tool-box {
 	width: 6.67vw;
 	height: 6.67vw;
-	background-color: #333;
+	background-color: #3c076e;
 	border-radius: 0.42vw;
 	padding: 0.26vw;
 	text-align: center;
 	margin: 0.26vw;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+.tool-box:hover {
+	background-color: #370664;
+	transform: scale(1.05);
 }
 
 .tool-title {

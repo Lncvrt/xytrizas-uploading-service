@@ -16,7 +16,7 @@ if (!checkUserSession($conn)) {
 
 $session = htmlspecialchars($_COOKIE['session']);
 
-$stmt = $conn->prepare("SELECT uid, display_name, email, api_key, role, discord_id FROM users WHERE session = ?");
+$stmt = $conn->prepare("SELECT uid, username, email, api_key, role, discord_id FROM users WHERE session = ?");
 $stmt->bind_param("s", $session);
 $stmt->execute();
 $stmt->bind_result($uid, $username, $email, $api_key, $role, $discord_id);

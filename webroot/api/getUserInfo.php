@@ -64,7 +64,6 @@ if ($result->num_rows > 0) {
     $info = [
         'uid' => $userInfo['uid'],
         'username' => $userInfo['username'],
-        'displayName' => $userInfo['display_name'] ?? $userInfo['username'],
         'discordId' => $userInfo['discord_id'],
         'role' => $role,
         'registerTime' => $userInfo['register_time'],
@@ -73,7 +72,7 @@ if ($result->num_rows > 0) {
 
     $response = [
         'success' => true,
-        'response' => 'Information for user "' . $userInfo['display_name'] . '"',
+        'response' => 'Information for user "' . $userInfo['username'] . '"',
         'userinfo' => $info,
     ];
 

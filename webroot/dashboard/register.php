@@ -96,7 +96,6 @@ if (isset($_COOKIE['session'])) {
         <p>Please create an account to continue</p>
         <form id="loginForm">
             <input type="text" id="email" placeholder="Email" required>
-            <input type="text" id="displayname" placeholder="Display Name (optional)">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
             <div class="cf-turnstile" data-sitekey="<?= $captcha_sitekey ?>" data-callback="javascriptCallback"></div>
@@ -127,14 +126,13 @@ if (isset($_COOKIE['session'])) {
                 event.preventDefault();
 
                 var email = $('#email').val();
-                var displayname = $('#displayname').val();
                 var username = $('#username').val();
                 var password = $('#password').val();
 
                 $.ajax({
                     type: "POST",
                     url: '../../api/registerAccount.php',
-                    data: { email: email, displayname: displayname, username: username, password: password, captcha_token: captcha_token },
+                    data: { email: email, username: username, password: password, captcha_token: captcha_token },
                     success: function (data, textStatus, xhr) {
                         console.log(data, xhr.status);
                         try {

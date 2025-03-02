@@ -16,14 +16,12 @@ if (!checkUserSession($conn)) {
 
 $session = htmlspecialchars($_COOKIE['session']);
 
-$stmt = $conn->prepare("SELECT uid, display_name, username, email, api_key, discord_id, role, discord_avatar FROM users WHERE session = ?");
+$stmt = $conn->prepare("SELECT uid, username, email, api_key, discord_id, role, discord_avatar FROM users WHERE session = ?");
 $stmt->bind_param("s", $session);
 $stmt->execute();
-$stmt->bind_result($uid, $displayname, $username, $email, $api_key, $discord_id, $role, $avatar);
+$stmt->bind_result($uid, $username, $email, $api_key, $discord_id, $role, $avatar);
 $stmt->fetch();
 $stmt->close();
-
-$displayname = htmlspecialchars($displayname, ENT_QUOTES, 'UTF-8') ?? $username;
 
 $conn->close();
 
@@ -69,7 +67,6 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
         <div id="account-information" class="section">
             <h2>Account Information</h2>
             <p id="username"><strong>Username:</strong> <?php echo $username;?></p>
-            <p id="displayname"><strong>Display Name:</strong> <?php echo $displayname;?></p>
             <p><strong>UID:</strong> <?php echo $uid;?></p>
             <p><strong>Discord ID:</strong> <?php echo $discord_id;?></p>
             <p><strong>Email:</strong> <em class="blur-on-hover"><?php echo $email;?></em></p>
@@ -90,7 +87,7 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
                     <input type="password" id="oldPassword" placeholder="Old Password">
                     <input type="password" id="newPassword" placeholder="New Password">
                     <input type="password" id="confirmPassword" placeholder="Confirm New Password">
-                    <input type="hidden" id="username" value="<?php echo $displayname;?>">
+                    <input type="hidden" id="username" value="<?php echo $username;?>">
                     <button type="submit">Change Password</button>
                 </form>
             </div>
@@ -104,14 +101,6 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
                     <input type="hidden" id="oldUsername" value="<?php echo $username;?>">
                     <input type="password" id="usernamepassword" placeholder="Password">
                     <button type="submit">Change Username</button>
-                </form>
-                <h2>Change Display Name</h2>
-                <form id="displaynameChangeForm">
-                    <input type="text" id="newDisplayname" placeholder="New Display Name">
-                    <input type="hidden" id="oldDisplayname" value="<?php echo $displayname;?>">
-                    <input type="hidden" id="username" value="<?php echo $username;?>">
-                    <input type="password" id="displayusernamepassword" placeholder="Password">
-                    <button type="submit">Change Display Name</button>
                 </form>
             </div>
 

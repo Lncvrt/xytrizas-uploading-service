@@ -141,8 +141,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     element1 = document.getElementById('passwordChangeForm');
     element2 = document.getElementById('usernameChangeForm');
-    element3 = document.getElementById('displaynameChangeForm');
-    if (element1 && element2 && element3) {
+    if (element1 && element2) {
         $(document).ready(function() {
             $('#passwordChangeForm').on('submit', function(e) {
                 e.preventDefault();
@@ -196,41 +195,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             showSuccess(response.response);
                             $('#oldUsername').val(newUsername);
                             $('#username').html('<strong>Username:</strong> ').append(document.createTextNode(newUsername));
-                        } else {
-                            showError(response.response);
-                        }
-                    },
-                    error: function(jqXHR) {
-                        if (jqXHR.responseJSON && jqXHR.responseJSON.response) {
-                            showError(jqXHR.responseJSON.response);
-                        } else {
-                            showError(jqXHR.responseText);
-                        }
-                    }
-                });
-            });
-
-            $('#displaynameChangeForm').on('submit', function(e) {
-                e.preventDefault();
-                var oldUsername = $('#oldDisplayname').val();
-                var newUsername = $('#newDisplayname').val();
-                var username = $('#username').val();
-                var password = $('#displayusernamepassword').val();
-                $.ajax({
-                    url: '/api/changeDisplayname.php',
-                    type: 'POST',
-                    data: {
-                        olddisplayname: oldUsername,
-                        newdisplayname: newUsername,
-                        username: username,
-                        password: password
-                    },
-                    success: function(data) {
-                        response = data;
-                        if (response.success) {
-                            showSuccess(response.response);
-                            $('#oldDisplayname').val(newUsername);
-                            $('#displayname').html('<strong>Username:</strong> ').append(document.createTextNode(newUsername));
                         } else {
                             showError(response.response);
                         }

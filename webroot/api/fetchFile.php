@@ -103,7 +103,7 @@ $stmt->close();
 
 $fileUrl = "https://files.upload.xytriza.com/{$file}";
 
-$stmt = $conn->prepare("SELECT display_name, timezone FROM users WHERE uid = ?");
+$stmt = $conn->prepare("SELECT username, timezone FROM users WHERE uid = ?");
 $stmt->bind_param("s", $uid);
 $stmt->execute();
 $stmt->bind_result($username, $timezone);

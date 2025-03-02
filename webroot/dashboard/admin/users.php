@@ -108,7 +108,6 @@ function getRole($role) {
                 echo "<tr>";
                 echo "<td>" . (!empty($row['uid']) ? htmlspecialchars($row['uid']) : "N/A") . "</td>";
                 echo "<td>" . (!empty($row['username']) ? htmlspecialchars($row['username']) : "N/A") . "</td>";
-                echo "<td>" . (!empty($row['display_name']) ? htmlspecialchars($row['display_name']) : "N/A") . "</td>";
                 if ($row['role'] != 0 || $role != 1) {
                     echo "<td>Hidden</td>";
                 } else {

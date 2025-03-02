@@ -63,7 +63,6 @@ if ($conn->connect_error) {
 }
 
 $request_username = $_POST['username'] ?? '';
-$request_displayname = (isset($_POST['displayname']) && !empty($_POST['displayname'])) ? $_POST['displayname'] : $request_username;
 $request_password = $_POST['password'] ?? '';
 $request_email = $_POST['email'] ?? '';
 
@@ -111,13 +110,6 @@ if (strlen($request_username) < 3 || strlen($request_username) > 32) {
     http_response_code(400);
     header('Content-Type: application/json');
     die(json_encode(['success' => 'false', 'response' => 'Userame must be between 3 and 32 characters']));
-    exit;
-}
-
-if (strlen($request_displayname) < 3 || strlen($request_displayname) > 32) {
-    http_response_code(400);
-    header('Content-Type: application/json');
-    die(json_encode(['success' => 'false', 'response' => 'Display Name must be between 3 and 32 characters']));
     exit;
 }
 
@@ -223,8 +215,8 @@ if ($result->num_rows > 0) {
         echo json_encode($response);
     }
 
-    $stmt = $conn->prepare("INSERT INTO users (username, display_name, password, email, api_key, emailconfirm, register_time) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $request_username, $request_displayname, $hashed_password, $request_email, $api_key, $emailconfirm, time());
+    $stmt = $conn->prepare("INSERT INTO users (username, password, email, api_key, emailconfirm, register_time) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssi", $request_username, $hashed_password, $request_email, $api_key, $emailconfirm, time());
     $stmt->execute();
 
     $response = [
