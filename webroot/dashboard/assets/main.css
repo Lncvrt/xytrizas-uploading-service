@@ -430,6 +430,7 @@ input:checked~.icon-times {
 	text-align: center;
 	margin: 0.26vw;
 	transition: background-color 0.3s, transform 0.3s;
+	cursor: pointer;
 }
 
 .tool-box:hover {
