@@ -70,6 +70,7 @@ function sendEmail($email, $password, $sender, $target, $target_user, $subject, 
     }
 }
 function checkDiscordLink($id) {
+    include '../config/config.php';
     if ($id == null || $id == "") {
         ?>
 <!DOCTYPE html>
@@ -93,7 +94,7 @@ function checkDiscordLink($id) {
         <div id="discord-link">
             <h1>Discord link required</h1>
             <p>You need to link your Discord account to use this service.</p>
-            <button onclick="setCookieAndRedirect()">Link Discord</button>
+            <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?= $discordRedirectUri ?>')">Link Discord</button>
         </div>
     </div>
 </body>

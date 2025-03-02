@@ -9,7 +9,6 @@ $googleBucketName = "";
 $googleKeyFilePath = "";
 
 $discordBotToken = "";
-$discordChannelId = "";
 $discordGuildId = "";
 $discordClientId = "";
 $discordClientSecret = "";

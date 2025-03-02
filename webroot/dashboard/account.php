@@ -98,7 +98,7 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
                 <h2>Change Username</h2>
                 <form id="usernameChangeForm">
                     <input type="text" id="newUsername" placeholder="New Username">
-                    <input type="hidden" id="oldUsername" value="<?php echo $username;?>">
+                    <input type="hidden" id="oldUsername" value="<?= $username ?>">
                     <input type="password" id="usernamepassword" placeholder="Password">
                     <button type="submit">Change Username</button>
                 </form>
@@ -106,7 +106,7 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
 
             <div id="user-settings" class="section half-width">
                 <h2>User Settings</h2>
-                <button onclick="setCookieAndRedirect()">Re-Link Discord</button>
+                <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?= $discordRedirectUri ?>')">Re-Link Discord</button>
                 <button onclick="copyAPIKey();">Copy API Key</button>
                 <button onclick="generateAPIKey();">Generate new API Key</button>
             </div>
