@@ -106,7 +106,7 @@ $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Admin" : ($role == 0 ? "Use
 
             <div id="user-settings" class="section half-width">
                 <h2>User Settings</h2>
-                <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?= $discordRedirectUri ?>')">Re-Link Discord</button>
+                <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?=  urlencode($discordRedirectUri) ?>')">Re-Link Discord</button>
                 <button onclick="copyAPIKey();">Copy API Key</button>
                 <button onclick="generateAPIKey();">Generate new API Key</button>
             </div>

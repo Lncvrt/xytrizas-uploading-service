@@ -94,7 +94,7 @@ function checkDiscordLink($id) {
         <div id="discord-link">
             <h1>Discord link required</h1>
             <p>You need to link your Discord account to use this service.</p>
-            <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?= $discordRedirectUri ?>')">Link Discord</button>
+            <button onclick="setCookieAndRedirect('<?= $discordClientId ?>', '<?= urlencode($discordRedirectUri) ?>')">Link Discord</button>
         </div>
     </div>
 </body>
