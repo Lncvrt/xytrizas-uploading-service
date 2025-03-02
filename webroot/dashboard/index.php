@@ -13,6 +13,7 @@ if (!checkUserSession($conn)) {
     header('Location: /dashboard/login.php');
     die();
 }
+$checkedSession = true;
 
 $session = htmlspecialchars($_COOKIE['session']);
 
@@ -106,8 +107,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-$conn->close();
-
 $size = formatUnitSize($totalSize);
 
 $uploadStatsData = json_encode(array_reverse(array_values($uploadsByDay)));
@@ -156,214 +155,186 @@ $news = str_ireplace('%dateformat%', date('F jS, Y'), $news);
 
 $motd = str_ireplace('%storage%', $size, $motd);
 $news = str_ireplace('%storage%', $size, $news);
+
+ob_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<div id="container">
+    <div class="info-group">
+        <h1 style="font-weight: bold;">Hello, <?php echo $username; ?> 👋</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xytriza's Uploading Service - Dashboard</title>
-    <link rel="icon" href="/assets/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="/dashboard/assets/main.css?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.css'); ?>">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/dashboard/assets/main.js?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.js'); ?>"></script>
-</head>
-<body>
-    <div id="sidebar">
-        <a href="/" class="logo"><img class="sidebar-item" src="/assets/logo.png" alt="Xytriza's Uploading Service" height="40vw" width="40vw"></a>
-        <a href="/dashboard/"><i class="fas fa-home sidebar-item"></i></a>
-        <a href="/dashboard/gallery.php"><i class="fas fa-file-alt sidebar-item" style="margin-left: 20%;"></i></a>
-        <a href="/dashboard/upload.php"><i class="fas fa-upload sidebar-item"></i></a>
-        <a href="/dashboard/settings.php"><i class="fas fa-cog sidebar-item"></i></a>
-        <a href="/dashboard/account.php" style="margin-top: auto;"><i class="fas fa-user-cog sidebar-item"></i></a>
-        <?php
-        if ($role === 1 || $role === 2) {
-            echo '<a href="/dashboard/admin" class="sidebar-item"><i class="fas fa-user-shield"></i></a>';
-        }
-        ?>
-        <a href="javascript:logout()"><i class="fas fa-sign-out-alt sidebar-item"></i></a>
+        <div class="info-box">
+            <p class="big"><strong>Storage Used</strong></p>
+            <p><?php echo $size; ?>/2.5 GB</p>
+        </div>
+        <div class="info-box">
+            <p class="big"><strong>Uploads</strong></p>
+            <p><?php echo $uploadCount; ?></p>
+        </div>
+        <div class="info-box">
+            <p class="big"><strong>User ID</strong></p>
+            <p><?php echo $uid; ?></p>
+        </div>
     </div>
-
-    <div id="notification-container"></div>
-
-    <div id="container">
-        <div class="info-group">
-            <h1 style="font-weight: bold;">Hello, <?php echo $username; ?> 👋</h1>
-
-            <div class="info-box">
-                <p class="big"><strong>Storage Used</strong></p>
-                <p><?php echo $size;?>/2.5 GB</p>
-            </div>
-            <div class="info-box">
-                <p class="big"><strong>Uploads</strong></p>
-                <p><?php echo $uploadCount;?></p>
-            </div>
-            <div class="info-box">
-                <p class="big"><strong>User ID</strong></p>
-                <p><?php echo $uid;?></p>
-            </div>
+    <div>
+        <div class="info-box" style="display: inline-block; width: 100%; min-height: 20vh;">
+            <p class="big"><strong>Recent News</strong></p>
+            <p><?php echo $news; ?></p>
         </div>
-        <div>
-            <div class="info-box" style="display: inline-block; width: 100%; min-height: 20vh;">
-                <p class="big"><strong>Recent News</strong></p>
-                <p><?php echo $news;?></p>
-            </div>
-            <div class="info-box" style="display: inline-block; width: 100%; min-height: 20vh;">
-                <p class="big"><strong>MOTD</strong></p>
-                <p><?php echo $motd;?></p>
-            </div>
-        </div>
-
-        <div id="charts-container">
-            <div id="canvas-group">
-                <p><strong>Daily Uploads</strong></p>
-                <canvas id="uploadStats"></canvas>
-            </div>
-            <div id="canvas-group">
-                <p><strong>Daily Unique Logins</strong></p>
-                <canvas id="loginStats"></canvas>
-            </div>
+        <div class="info-box" style="display: inline-block; width: 100%; min-height: 20vh;">
+            <p class="big"><strong>MOTD</strong></p>
+            <p><?php echo $motd; ?></p>
         </div>
     </div>
 
-    <script>
-        const formattedLabels = formatAllDates(<?php echo $uploadStatsLabels; ?>);
+    <div id="charts-container">
+        <div id="canvas-group">
+            <p><strong>Daily Uploads</strong></p>
+            <canvas id="uploadStats"></canvas>
+        </div>
+        <div id="canvas-group">
+            <p><strong>Daily Unique Logins</strong></p>
+            <canvas id="loginStats"></canvas>
+        </div>
+    </div>
+</div>
 
-        const uploadStatsData = {
-            labels: formattedLabels,
-            datasets: [{
-                label: 'Overall',
-                data: <?php echo $overallUploadStatsData; ?>,
-                borderColor: 'rgba(64, 82, 255, 1)',
-                borderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 10,
-                pointHitRadius: 20,
-                fill: true,
-                backgroundColor: 'rgba(64, 82, 255, 0.15)',
+<script>
+    const formattedLabels = formatAllDates(<?php echo $uploadStatsLabels; ?>);
+
+    const uploadStatsData = {
+        labels: formattedLabels,
+        datasets: [{
+            label: 'Overall',
+            data: <?php echo $overallUploadStatsData; ?>,
+            borderColor: 'rgba(64, 82, 255, 1)',
+            borderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 10,
+            pointHitRadius: 20,
+            fill: true,
+            backgroundColor: 'rgba(64, 82, 255, 0.15)',
+        },
+        {
+            label: 'You',
+            data: <?php echo $uploadStatsData; ?>,
+            borderColor: 'rgba(255, 64, 82, 1)',
+            borderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 10,
+            pointHitRadius: 20,
+            fill: true,
+            backgroundColor: 'rgba(255, 64, 82, 0.15)',
+        }]
+    };
+
+    const uploadStatsConfig = {
+        type: 'line',
+        data: uploadStatsData,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: false,
+                    grid: {
+                        display: false,
+                    }
+                },
+                y: {
+                    display: false,
+                    beginAtZero: true,
+                    grid: {
+                        display: false,
+                    }
+                }
             },
-            {
-                label: 'You',
-                data: <?php echo $uploadStatsData; ?>,
-                borderColor: 'rgba(255, 64, 82, 1)',
-                borderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 10,
-                pointHitRadius: 20,
-                fill: true,
-                backgroundColor: 'rgba(255, 64, 82, 0.15)',
-            }]
-        };
-
-        const uploadStatsConfig = {
-            type: 'line',
-            data: uploadStatsData,
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        display: false,
-                        grid: {
-                            display: false,
-                        }
-                    },
-                    y: {
-                        display: false,
-                        beginAtZero: true,
-                        grid: {
-                            display: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function (context) {
+                            return context[0].label;
+                        },
+                        label: function (context) {
+                            return `${context.dataset.label}: ${context.raw}`;
                         }
                     }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            title: function (context) {
-                                return context[0].label;
-                            },
-                            label: function (context) {
-                                return `${context.dataset.label}: ${context.raw}`;
-                            }
-                        }
-                    }
-                },
-                elements: {
-                    line: {
-                        cubicInterpolationMode: 'monotone',
-                    }
-                },
-                animation: {
-                    duration: 500
                 }
-            }
-        };
-
-        const loginStatsData = {
-            labels: formattedLabels,
-            datasets: [{
-                label: 'Logins',
-                data: <?php echo $loginStatsData; ?>,
-                borderColor: 'rgba(64, 255, 82, 1)',
-                borderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 10,
-                pointHitRadius: 20,
-                fill: true,
-                backgroundColor: 'rgba(64, 255, 82, 0.15)',
-            }]
-        };
-
-        const loginStatsConfig = {
-            type: 'line',
-            data: loginStatsData,
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        display: false,
-                        grid: {
-                            display: false,
-                        }
-                    },
-                    y: {
-                        display: false,
-                        beginAtZero: true,
-                        grid: {
-                            display: false,
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            title: function (context) {
-                                return context[0].label;
-                            },
-                            label: function (context) {
-                                return `${context.dataset.label}: ${context.raw}`;
-                            }
-                        }
-                    }
-                },
-                elements: {
-                    line: {
-                        cubicInterpolationMode: 'monotone',
-                    }
-                },
-                animation: {
-                    duration: 500
+            },
+            elements: {
+                line: {
+                    cubicInterpolationMode: 'monotone',
                 }
+            },
+            animation: {
+                duration: 500
             }
-        };
+        }
+    };
 
-        const uploadStatsCanvas = document.getElementById('uploadStats').getContext('2d');
-        new Chart(uploadStatsCanvas, uploadStatsConfig);
-        const loginStatsCanvas = document.getElementById('loginStats').getContext('2d');
-        new Chart(loginStatsCanvas, loginStatsConfig);
-    </script>
-</body>
-</html>
+    const loginStatsData = {
+        labels: formattedLabels,
+        datasets: [{
+            label: 'Logins',
+            data: <?php echo $loginStatsData; ?>,
+            borderColor: 'rgba(64, 255, 82, 1)',
+            borderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 10,
+            pointHitRadius: 20,
+            fill: true,
+            backgroundColor: 'rgba(64, 255, 82, 0.15)',
+        }]
+    };
+
+    const loginStatsConfig = {
+        type: 'line',
+        data: loginStatsData,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: false,
+                    grid: {
+                        display: false,
+                    }
+                },
+                y: {
+                    display: false,
+                    beginAtZero: true,
+                    grid: {
+                        display: false,
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function (context) {
+                            return context[0].label;
+                        },
+                        label: function (context) {
+                            return `${context.dataset.label}: ${context.raw}`;
+                        }
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    cubicInterpolationMode: 'monotone',
+                }
+            },
+            animation: {
+                duration: 500
+            }
+        }
+    };
+
+    const uploadStatsCanvas = document.getElementById('uploadStats').getContext('2d');
+    new Chart(uploadStatsCanvas, uploadStatsConfig);
+    const loginStatsCanvas = document.getElementById('loginStats').getContext('2d');
+    new Chart(loginStatsCanvas, loginStatsConfig);
+</script>
+<?php
+$content = ob_get_clean();
+$title = 'Dashboard';
+include 'layout.php';
+?>

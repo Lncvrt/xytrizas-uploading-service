@@ -233,6 +233,7 @@ body.tint::before {
 .sidebar-item {
 	margin-bottom: 1.56vw;
 	font-size: 1.56vw;
+	cursor: pointer;
 }
 
 #upload {
