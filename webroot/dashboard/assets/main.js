@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function deleteFile(deletionKey, imageId) {
-    const deleteUrl = 'https://upload.xytriza.com/delete/' + deletionKey;
+    const deleteUrl = '/delete/' + deletionKey;
 
     $.ajax({
         url: deleteUrl,
@@ -380,7 +380,7 @@ function saveTimeSettings() {
     var timeFormat = getSelectedRadioValue(timeFormatElements);
 
     $.ajax({
-        url: 'https://upload.xytriza.com/api/dashboard/setPreferences.php',
+        url: '/api/dashboard/setPreferences.php',
         type: 'POST',
         data: {country: country, timezone: timezone, dateformat: dateFormat, timeformat: timeFormat},
         success: function(responseJson) {
@@ -452,7 +452,7 @@ async function handleFileUpload(file) {
 }
 
 async function handleUrlUpload() {
-    const url = document.getElementById('urlInput').value = document.getElementById('urlInput').value.replace('https://upload.xytriza.com/files/', 'https://files.upload.xytriza.com/').replace('http://upload.xytriza.com/files/', 'https://files.upload.xytriza.com/');
+    const url = document.getElementById('urlInput').value = document.getElementById('urlInput').value.replace('/files/', 'https://files.upload.xytriza.com/').replace('http://upload.xytriza.com/files/', 'https://files.upload.xytriza.com/');
     const fileName = document.getElementById('fileName').value;
     if (!url) {
         showError('Please enter a valid URL');

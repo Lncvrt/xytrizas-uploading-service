@@ -151,8 +151,8 @@ if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $response = [
         'success' => true,
         'response' => 'File uploaded successfully',
-        'fileUrl' => 'https://upload.xytriza.com/files/'.$randomString,
-        'deletionUrl' => 'https://upload.xytriza.com/delete/'.$deleteKey,
+        'fileUrl' => '/files/'.$randomString,
+        'deletionUrl' => '/delete/'.$deleteKey,
         'deletionKey' => $deleteKey,
     ];
 
