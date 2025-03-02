@@ -182,8 +182,7 @@ $news = str_ireplace('%storage%', $size, $news);
         <a href="/dashboard/account.php" style="margin-top: auto;"><i class="fas fa-user-cog sidebar-item"></i></a>
         <?php
         if ($role === 1 || $role === 2) {
-            echo '<a href="/dashboard/admin" class="sidebar-item"><i class="fas fa-user-shield"></i></a>
-            <a href="/dashboard/admin/users.php" class="sidebar-item"><i class="fas fa-user-edit"></i></a>';
+            echo '<a href="/dashboard/admin" class="sidebar-item"><i class="fas fa-user-shield"></i></a>';
         }
         ?>
         <a href="javascript:logout()"><i class="fas fa-sign-out-alt sidebar-item"></i></a>
