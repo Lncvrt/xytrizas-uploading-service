@@ -1,5 +1,5 @@
 <?php
-require '../../../data/vendor/autoload.php';
+require '../../libs/vendor/autoload.php';
 require '../config/config.php';
 require '../incl/main.php';
 

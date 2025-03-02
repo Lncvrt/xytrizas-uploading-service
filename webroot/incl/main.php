@@ -33,9 +33,9 @@ function formatUnitSize($unformattedsize) {
     return $size;
 }
 function sendEmail($email, $password, $sender, $target, $target_user, $subject, $body, $ishtml, $mailhost) {
-    require '../../../data/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-    require '../../../data/vendor/vendor/phpmailer/phpmailer/src/Exception.php';
-    require '../../../data/vendor/vendor/phpmailer/phpmailer/src/SMTP.php';
+    require '../../libs/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require '../../libs/vendor/vendor/phpmailer/phpmailer/src/Exception.php';
+    require '../../libs/vendor/vendor/phpmailer/phpmailer/src/SMTP.php';
 
     $mail = new PHPMailer(true);
 
