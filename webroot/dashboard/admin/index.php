@@ -52,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $sql = "SELECT value FROM settings WHERE id = 1";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$news = base64_decode($row['value']);
+$news = base64_decode($row['value'] ?? '');
 
 $sql = "SELECT value FROM settings WHERE id = 2";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$motd = base64_decode($row['value']);
+$motd = base64_decode($row['value'] ?? '');
 
 $totalSize = 0;
 $uploadCount = 0;
