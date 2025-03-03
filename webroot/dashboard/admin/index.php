@@ -108,8 +108,7 @@ ob_start();
         </div>
     </div>
     <p>Dynamic placeholders like %discord% (Discord link), %username% (user's name), %uploads% (user's upload count),
-        %role% (user's role), %uid% (user ID), %storage% (user's storage usage), and date details (%year%, %month%,
-        %monthformat%, %day%, %dayformat%, %date%) are automatically replaced with specific user or system information
+        %role% (user's role), %uid% (user ID), and %storage% (user's storage usage) are automatically replaced with specific user or system information
         for personalized messages.</p>
     <form method="POST">
         <p>News</p>
