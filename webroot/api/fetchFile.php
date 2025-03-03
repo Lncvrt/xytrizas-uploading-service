@@ -45,7 +45,7 @@ if (!$stmt->fetch()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xytriza's Uploading Service - File not found</title>
     <link rel="icon" href="/assets/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="/dashboard/assets/main.css?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.css'); ?>">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -176,7 +176,7 @@ $original_filename = base64_decode($original_filename);
     ?>
     <meta property="theme-color" content="#3c076e">
     <meta property="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="/dashboard/assets/main.css?v=<?php echo filemtime('/var/www/xus/webroot/dashboard/assets/main.css'); ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
