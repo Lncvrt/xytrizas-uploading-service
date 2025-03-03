@@ -197,6 +197,7 @@ if (isset($_COOKIE['session'])) {
                     } else {
                         var response = JSON.parse(xhr.responseText);
                         alert(response.response + ' (' + xhr.status + ')');
+                        document.querySelector('.cf-turnstile').innerHTML = '';
                         captcha_token = '';
                         turnstile.render('.cf-turnstile', {
                             sitekey: '<?= $captcha_sitekey ?>',

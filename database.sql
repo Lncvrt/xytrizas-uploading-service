@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 03, 2025 at 09:59 PM
+-- Generation Time: Mar 03, 2025 at 11:34 PM
 -- Server version: 11.4.3-MariaDB-1
 -- PHP Version: 8.3.11
 
@@ -144,6 +144,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `warnings`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

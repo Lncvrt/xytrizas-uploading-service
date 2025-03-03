@@ -214,9 +214,11 @@ if ($result->num_rows > 0) {
         http_response_code(500);
         echo json_encode($response);
     }
+    
+    $register_time = time();
 
     $stmt = $conn->prepare("INSERT INTO users (username, password, email, api_key, emailconfirm, register_time) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $request_username, $hashed_password, $request_email, $api_key, $emailconfirm, time());
+    $stmt->bind_param("sssssi", $request_username, $hashed_password, $request_email, $api_key, $emailconfirm, $register_time);
     $stmt->execute();
 
     $response = [
