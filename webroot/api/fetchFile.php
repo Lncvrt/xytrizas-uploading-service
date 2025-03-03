@@ -102,21 +102,17 @@ $stmt->close();
 
 $fileUrl = "https://files.upload.xytriza.com/{$file}";
 
-$stmt = $conn->prepare("SELECT username, timezone FROM users WHERE uid = ?");
+$stmt = $conn->prepare("SELECT username FROM users WHERE uid = ?");
 $stmt->bind_param("s", $uid);
 $stmt->execute();
-$stmt->bind_result($username, $timezone);
+$stmt->bind_result($username);
 $stmt->fetch();
 $stmt->close();
 
 $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
 
-if (!isset($timezone) || empty($timezone) || !in_array($timezone, DateTimeZone::listIdentifiers(DateTimeZone::ALL))) {
-    $timezone = "America/Los_Angeles";
-}
-
 $date = new DateTime("@{$uploaded}");
-$date->setTimezone(new DateTimeZone($timezone));
+$date->setTimezone(new DateTimeZone("America/Phoenix")); //temp
 
 $utcOffset = $date->getOffset() / 3600;
 $utcOffsetFormatted = $utcOffset > 0 ? "+{$utcOffset}" : $utcOffset;

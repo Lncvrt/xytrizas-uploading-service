@@ -334,37 +334,6 @@ function logout() {
     location.reload();
 }
 
-function saveTimeSettings() {
-    var country = document.getElementById("country").value
-    var timezone = document.getElementById("timezone").value
-    var dateFormatElements = document.getElementsByName("dateFormat");
-    var timeFormatElements = document.getElementsByName("timeFormat");
-
-    var dateFormat = getSelectedRadioValue(dateFormatElements);
-    var timeFormat = getSelectedRadioValue(timeFormatElements);
-
-    $.ajax({
-        url: '/api/dashboard/setPreferences.php',
-        type: 'POST',
-        data: {country: country, timezone: timezone, dateformat: dateFormat, timeformat: timeFormat},
-        success: function(responseJson) {
-            console.log('Server response:', responseJson);
-
-            const isSuccess = responseJson.success === true || responseJson.success === 'true';
-
-            if (isSuccess) {
-                showSuccess('Saved your preferences');
-            } else {
-                showError(responseJson.response);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            showError(jqXHR.responseText);
-        }
-    });
-
-}
-
 function getSelectedRadioValue(radioElements) {
     for (var i = 0; i < radioElements.length; i++) {
         if (radioElements[i].checked) {

@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
 
 $uploadsByDay = $overallUploadsByDay = $overallLoginsByDay = array();
 
-$currentDate = new DateTime('now', new DateTimeZone('America/Los_Angeles'));
+$currentDate = new DateTime('now', new DateTimeZone("America/Los_Angeles"));
 for ($i = 0; $i < 7; $i++) {
     $day = $currentDate->format('m-d-Y');
     $uploadsByDay[$day] = 0;
@@ -115,7 +115,6 @@ $loginStatsData = json_encode(array_reverse(array_values($overallLoginsByDay)));
 $uploadStatsLabels = json_encode(array_reverse(array_keys($uploadsByDay)));
 
 $role_format = $role == 1 ? "Owner" : ($role == 2 ? "Manager" : ($role == 0 ? "User" : "Unknown"));
-date_default_timezone_set('America/Los_Angeles');
 
 $motd = str_ireplace('%discord%', '<a href="/discord" style="text-decoration: underline;">Discord</a>', $motd);
 $news = str_ireplace('%discord%', '<a href="/discord" style="text-decoration: underline;">Discord</a>', $news);
@@ -131,27 +130,6 @@ $news = str_ireplace('%role%', $role_format, $news);
 
 $motd = str_ireplace('%uid%', $uid, $motd);
 $news = str_ireplace('%uid%', $uid, $news);
-
-$motd = str_ireplace('%year%', date('Y'), $motd);
-$news = str_ireplace('%year%', date('Y'), $news);
-
-$motd = str_ireplace('%month%', date('n'), $motd);
-$news = str_ireplace('%month%', date('n'), $news);
-
-$motd = str_ireplace('%monthformat%', date('F'), $motd);
-$news = str_ireplace('%monthformat%', date('F'), $news);
-
-$motd = str_ireplace('%day%', date('j'), $motd);
-$news = str_ireplace('%day%', date('j'), $news);
-
-$motd = str_ireplace('%dayformat%', date('l'), $motd);
-$news = str_ireplace('%dayformat%', date('l'), $news);
-
-$motd = str_ireplace('%date%', date('n/j/Y'), $motd);
-$news = str_ireplace('%date%', date('n/j/Y'), $news);
-
-$motd = str_ireplace('%dateformat%', date('F jS, Y'), $motd);
-$news = str_ireplace('%dateformat%', date('F jS, Y'), $news);
 
 $motd = str_ireplace('%storage%', $size, $motd);
 $news = str_ireplace('%storage%', $size, $news);
