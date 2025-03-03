@@ -34,8 +34,8 @@ ob_start();
 if (isset($_GET['type'])) {
     if ($_GET['type'] === 'windows') {
         echo '<h3>Windows - Upload Configuration</h3>
-        <p>Download ShareX here: <a href="https://getsharex.com/" style="text-decoration: underline;" target="_blank">https://getsharex.com/</a></p>
-        <p>Download the ShareX upload config here: <a href="javascript:downloadConfig()" style="text-decoration: underline;">Download</a></p>
+        <p>Download ShareX <a href="https://getsharex.com/" style="text-decoration: underline;" target="_blank">here</a></p>
+        <p>Download the ShareX upload config <a href="javascript:downloadConfig()" style="text-decoration: underline;">here</a></p>
         <p>Run the ShareX upload config and click "Yes" when prompted</p>';
     } elseif ($_GET['type'] === 'ios') {
         echo '<h3>iOS - Upload Configuration</h3>
