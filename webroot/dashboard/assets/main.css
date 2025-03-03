@@ -688,6 +688,14 @@ a {
 	color: #fff;
 }
 
+img, a {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}
+
 .file-textbox {
 	width: 50vw;
 	min-height: 30vh;
