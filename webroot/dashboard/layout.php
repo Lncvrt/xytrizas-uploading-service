@@ -30,7 +30,7 @@ if (isset($role)) {
 }
 
 $lines = explode("\n", $content);
-foreach ($lines as $i => &$line) if ($i > 0) $line = "        " . $line;
+foreach ($lines as $i => &$line) if ($i > 0 && $i < count($lines) - 1) $line = "        " . $line;
 $content = implode("\n", $lines);
 ?>
 <!DOCTYPE html>
