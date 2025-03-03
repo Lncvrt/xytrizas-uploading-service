@@ -28,6 +28,10 @@ if (isset($role)) {
     $stmt->fetch();
     $stmt->close();
 }
+
+$lines = explode("\n", $content);
+foreach ($lines as $i => &$line) if ($i > 0) $line = "        " . $line;
+$content = implode("\n", $lines);
 ?>
 <!DOCTYPE html>
 <html lang="en">
