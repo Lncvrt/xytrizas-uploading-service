@@ -51,7 +51,7 @@ $content = implode("\n", $lines);
         <div id="sidebar">
             <!-- <a href="/" class="logo"><img class="sidebar-item" src="/assets/logo.png" alt="Xytriza's Uploading Service" height="40vw" width="40vw"></a> -->
             <a href="/dashboard/"><i class="fas fa-home sidebar-item"></i></a>
-            <a href="/dashboard/gallery.php"><i class="fas fa-photo-film sidebar-item" style="margin-left: 20%;"></i></a>
+            <a href="/dashboard/gallery.php"><i class="fas fa-photo-film sidebar-item"></i></a>
             <a href="/dashboard/upload.php"><i class="fas fa-upload sidebar-item"></i></a>
             <a href="/dashboard/settings.php"><i class="fas fa-cog sidebar-item"></i></a>
             <a href="/dashboard/account.php" style="margin-top: auto;"><i class="fas fa-user-cog sidebar-item"></i></a>
