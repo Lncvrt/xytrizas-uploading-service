@@ -683,6 +683,10 @@ form textarea {
 	filter: none;
 }
 
+#account-information span {
+	cursor: pointer;
+}
+
 a {
 	text-decoration: none;
 	color: #fff;
