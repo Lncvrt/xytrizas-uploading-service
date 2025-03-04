@@ -37,13 +37,13 @@ function showNotification(message, type) {
     var container = document.getElementById('notification-container');
     container.appendChild(notification);
     notification.style.transform = 'translateY(100%)';
-    setTimeout(function() {
+    setTimeout(function () {
         notification.style.transform = 'translateY(0)';
     }, 100);
 
-    setTimeout(function() {
+    setTimeout(function () {
         notification.style.transform = 'translateY(100%)';
-        setTimeout(function() {
+        setTimeout(function () {
             container.removeChild(notification);
         }, 500);
     }, 5000);
@@ -62,21 +62,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     element = document.getElementById('dropZone');
     if (element) {
-        element.addEventListener('click', function() {
+        element.addEventListener('click', function () {
             document.getElementById('fileInput').click();
         });
     }
 
     element = document.getElementById('fileInput');
     if (element) {
-        element.addEventListener('change', function(event) {
+        element.addEventListener('change', function (event) {
             handleFileUpload(event.target.files[0]);
         });
     }
 
     element = document.getElementById('dropZone');
     if (element) {
-            element.addEventListener('dragover', function(event) {
+        element.addEventListener('dragover', function (event) {
             event.preventDefault();
             event.stopPropagation();
             event.target.style.border = '3px solid #09f';
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     element = document.getElementById('dropZone');
     if (element) {
-            element.addEventListener('dragleave', function(event) {
+        element.addEventListener('dragleave', function (event) {
             event.preventDefault();
             event.stopPropagation();
             event.target.style.border = '2px dashed #fff';
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     element = document.getElementById('dropZone');
     if (element) {
-        element.addEventListener('drop', function(event) {
+        element.addEventListener('drop', function (event) {
             event.preventDefault();
             event.stopPropagation();
             event.target.style.border = '2px dashed #fff';
@@ -116,8 +116,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             $.ajax({
                 url: '/api/dashboard/setPreferences.php',
                 type: 'POST',
-                data: {[`${label}`]: value},
-                success: function(response) {
+                data: { [`${label}`]: value },
+                success: function (response) {
                     console.log('Full response:', response);
                     if (response.success) {
                         console.log('Settings updated: ', response.response);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         showError(response.response);
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     console.error('Update failed: ', xhr);
                     if (xhr.responseJSON && xhr.responseJSON.response) {
                         showError(xhr.responseJSON.response);
@@ -142,8 +142,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     element1 = document.getElementById('passwordChangeForm');
     element2 = document.getElementById('usernameChangeForm');
     if (element1 && element2) {
-        $(document).ready(function() {
-            $('#passwordChangeForm').on('submit', function(e) {
+        $(document).ready(function () {
+            $('#passwordChangeForm').on('submit', function (e) {
                 e.preventDefault();
                 var oldPassword = $('#oldPassword').val();
                 var newPassword = $('#newPassword').val();
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         newpassword: newPassword,
                         confirmpassword: confirmPassword
                     },
-                    success: function(data) {
+                    success: function (data) {
                         response = JSON.parse(data);
                         if (response.success) {
                             location.reload();
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             showError(response.response);
                         }
                     },
-                    error: function(error) {
+                    error: function (error) {
                         if (error.responseJSON && error.responseJSON.response) {
                             showError(error.responseJSON.response);
                         } else {
@@ -175,8 +175,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     }
                 });
             });
-        
-            $('#usernameChangeForm').on('submit', function(e) {
+
+            $('#usernameChangeForm').on('submit', function (e) {
                 e.preventDefault();
                 var oldUsername = $('#oldUsername').val();
                 var newUsername = $('#newUsername').val();
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         newusername: newUsername,
                         password: password
                     },
-                    success: function(data) {
+                    success: function (data) {
                         response = data;
                         if (response.success) {
                             showSuccess(response.response);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             showError(response.response);
                         }
                     },
-                    error: function(jqXHR) {
+                    error: function (jqXHR) {
                         if (jqXHR.responseJSON && jqXHR.responseJSON.response) {
                             showError(jqXHR.responseJSON.response);
                         } else {
@@ -220,7 +220,7 @@ function deleteFile(deletionKey, imageId) {
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
-        success: function(responseJson) {
+        success: function (responseJson) {
             console.log('Server response:', responseJson);
 
             const isSuccess = responseJson.success === true || responseJson.success === 'true';
@@ -239,9 +239,9 @@ function deleteFile(deletionKey, imageId) {
                 showError("Error deleting file: " + responseJson.response)
             }
         },
-        error: function(xhr, status, error) {
-            console.error('Error deleting file:', error +  ' (' + status + ')');
-            showError('Error deleting file: ' + error +  ' (' + status + ')');
+        error: function (xhr, status, error) {
+            console.error('Error deleting file:', error + ' (' + status + ')');
+            showError('Error deleting file: ' + error + ' (' + status + ')');
         }
     });
 }
@@ -280,7 +280,7 @@ async function copyToClipboard(text, message, type) {
                 showSuccess(message);
             } else if (type === "1" || type === "error") {
                 showError(message);
-            } else  {
+            } else {
                 console.log('Invalid copy type');
             }
         }
@@ -298,20 +298,20 @@ function downloadFile(fileId, originalName, fileType) {
             responseType: 'blob'
         },
         success: function (data) {
-            var blob = new Blob([data], {type: fileType});
+            var blob = new Blob([data], { type: fileType });
             var url = window.URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
             a.download = originalName;
             document.body.appendChild(a);
-            a.click();        
+            a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             showSuccess("File downloaded successfully")
         },
-        error: function(xhr, status, error) {
-            console.error('Error downloading file:', error +  ' (' + status + ')');
-            showError('Error downloading file: ' + error +  ' (' + status + ')');
+        error: function (xhr, status, error) {
+            console.error('Error downloading file:', error + ' (' + status + ')');
+            showError('Error downloading file: ' + error + ' (' + status + ')');
         }
     });
 }
@@ -357,7 +357,7 @@ async function handleFileUpload(file) {
 
     document.getElementById('progressText').style.display = 'block';
 
-    xhr.upload.onprogress = function(event) {
+    xhr.upload.onprogress = function (event) {
         if (event.lengthComputable) {
             const percentage = Math.round((event.loaded / event.total) * 100);
             document.getElementById('progressText').innerText = percentage + '%';
@@ -366,7 +366,7 @@ async function handleFileUpload(file) {
         }
     };
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success === true) {
@@ -415,7 +415,7 @@ async function handleUrlUpload() {
 
     document.getElementById('progressText').style.display = 'block';
 
-    xhr.upload.onprogress = function(event) {
+    xhr.upload.onprogress = function (event) {
         if (event.lengthComputable) {
             const percentage = Math.round((event.loaded / event.total) * 100);
             document.getElementById('progressText').innerText = percentage + '%';
@@ -424,7 +424,7 @@ async function handleUrlUpload() {
         }
     };
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.success === true) {
@@ -446,7 +446,7 @@ function downloadConfig() {
     $.ajax({
         url: '/api/dashboard/generateConfig.php',
         method: 'GET',
-        success: function(response) {
+        success: function (response) {
             var downloadLink = document.createElement('a');
             var url = window.URL.createObjectURL(new Blob([JSON.stringify(response)]));
             downloadLink.href = url;
@@ -456,7 +456,7 @@ function downloadConfig() {
             document.body.removeChild(downloadLink);
             showSuccess('Config file downloaded successfully');
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             if (jqXHR.responseJSON && jqXHR.responseJSON.response) {
                 showError(jqXHR.responseJSON.response);
             } else {
@@ -504,7 +504,7 @@ function saveFileSettings() {
             password: fileSettingsPassword.value,
             filename: fileSettingsFilename.value
         },
-        success: function(response) {
+        success: function (response) {
             console.log('Server response:', response);
             if (response.success) {
                 showSuccess('File settings saved successfully');
@@ -525,7 +525,7 @@ function saveFileSettings() {
                 showError(response.response);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             showError(jqXHR.responseText);
         }
     });
@@ -547,7 +547,7 @@ function generateAPIKey() {
     $.ajax({
         url: '/api/dashboard/generateAPIKey.php',
         type: 'GET',
-        success: function(response) {
+        success: function (response) {
             console.log('Server response:', response);
             if (response.success) {
                 showSuccess('API key regenerated successfully');
@@ -555,7 +555,7 @@ function generateAPIKey() {
                 showError(response.response);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             showError(jqXHR.responseText);
         }
     });
@@ -565,7 +565,7 @@ function copyAPIKey() {
     $.ajax({
         url: '/api/dashboard/getAPIKey.php',
         type: 'GET',
-        success: function(response) {
+        success: function (response) {
             console.log('Server response:', response);
             if (response.success) {
                 copyToClipboard(response.api_key, 'API Key copied to clipboard', 0);
@@ -573,7 +573,7 @@ function copyAPIKey() {
                 showError(response.response);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             showError(jqXHR.responseText);
         }
     });
@@ -583,7 +583,7 @@ function deleteAllFiles() {
     $.ajax({
         url: '/api/deleteAllFiles.php',
         type: 'GET',
-        success: function(response) {
+        success: function (response) {
             console.log('Server response:', response);
             if (response.success) {
                 showSuccess('All files deleted successfully');
@@ -591,13 +591,13 @@ function deleteAllFiles() {
                 showError(response.response);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             showError(jqXHR.responseText);
         }
     });
 }
 
-test = function() {
+test = function () {
     $.ajax({
         url: '/api/dashboard/setStatus.php',
         type: 'GET',
@@ -606,7 +606,7 @@ test = function() {
         },
     });
 
-    setInterval(function() {
+    setInterval(function () {
         $.ajax({
             url: '/api/dashboard/setStatus.php',
             type: 'GET',
