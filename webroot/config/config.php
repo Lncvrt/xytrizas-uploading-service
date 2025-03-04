@@ -16,4 +16,3 @@ $discordRedirectUri = "";
 
 $captcha_secretkey = "";
 $captcha_sitekey = "";
-?>

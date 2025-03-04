@@ -36,18 +36,19 @@ if ($result->num_rows == 0) {
 }
 
 $config = '{
-    "Name": "Xytriza\'s Uploading Service",
-    "DestinationType": "ImageUploader, FileUploader",
-    "RequestType": "POST",
-    "RequestURL": "/api/uploadFile.php",
-    "FileFormName": "file",
-    "Body": "MultipartFormData",
+  "Version": "17.0.0",
+  "Name": "Xytriza\'s Uploading Service",
+  "DestinationType": "ImageUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "https://xus.lncvrt.xyz/api/uploadFile.php",
+  "FileFormName": "file",
+  "Body": "MultipartFormData",
     "Headers": {
         "key": "' . $key . '"
     },
-    "URL": "$json:fileUrl$",
-    "DeletionURL": "$json:deletionUrl$",
-    "ErrorMessage": "$json:error$"
+  "URL": "{json:imageUrl}",
+  "DeletionURL": "{json:deletionUrl}",
+  "ErrorMessage": "{json:error}"
 }';
 header('Content-Type: application/json');
 header('Content-Disposition: attachment; filename="xytrizas-uploading-service.sxcu"');
