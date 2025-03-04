@@ -34,22 +34,21 @@ if ($result->num_rows == 0) {
     header('Content-Type: application/json');
     die(json_encode($response));
 }
-
-$config = '{
-  "Version": "17.0.0",
-  "Name": "Xytriza\'s Uploading Service",
-  "DestinationType": "ImageUploader, FileUploader",
-  "RequestMethod": "POST",
-  "RequestURL": "https://xus.lncvrt.xyz/api/uploadFile.php",
-  "FileFormName": "file",
-  "Body": "MultipartFormData",
-    "Headers": {
-        "key": "' . $key . '"
-    },
-  "URL": "{json:imageUrl}",
-  "DeletionURL": "{json:deletionUrl}",
-  "ErrorMessage": "{json:error}"
-}';
+$config = json_encode([
+    'Version' => '17.0.0',
+    'Name' => "Xytriza's Uploading Service",
+    'DestinationType' => 'ImageUploader, FileUploader',
+    'RequestMethod' => 'POST',
+    'RequestURL' => 'https://xus.lncvrt.xyz/api/uploadFile.php',
+    'FileFormName' => 'file',
+    'Body' => 'MultipartFormData',
+    'Headers' => [
+        'key' => $key
+    ],
+    'URL' => '{json:imageUrl}',
+    'DeletionURL' => '{json:deletionUrl}',
+    'ErrorMessage' => '{json:error}'
+], JSON_PRETTY_PRINT);
 header('Content-Type: application/json');
 header('Content-Disposition: attachment; filename="xytrizas-uploading-service.sxcu"');
 header('Expires: 0');
