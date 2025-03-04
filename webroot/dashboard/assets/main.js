@@ -246,23 +246,6 @@ function deleteFile(deletionKey, imageId) {
     });
 }
 
-function copyToClipboardOld(text, message, type) {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-    console.log('Link copied to clipboard: ', tempInput.value);
-    if (message) {
-        if (type == 0) {
-            showSuccess(message);
-        } else if (type == 1) {
-            showError(message);
-        }
-    }
-}
-
 async function copyToClipboard(text, message, type) {
     if (!navigator.clipboard) {
         console.error('Clipboard not available');
@@ -327,25 +310,6 @@ function formatDate(dateStr) {
 
 function formatAllDates(dateStrArray) {
     return dateStrArray.map(dateStr => formatDate(dateStr));
-}
-
-function logout() {
-    document.cookie = "session=" + "; path=/";
-    location.reload();
-}
-
-function getSelectedRadioValue(radioElements) {
-    for (var i = 0; i < radioElements.length; i++) {
-        if (radioElements[i].checked) {
-            return radioElements[i].value;
-        }
-    }
-    return null;
-}
-
-function logout() {
-    document.cookie = "session=" + "; path=/";
-    location.reload();
 }
 
 async function handleFileUpload(file) {
@@ -595,24 +559,4 @@ function deleteAllFiles() {
             showError(jqXHR.responseText);
         }
     });
-}
-
-test = function () {
-    $.ajax({
-        url: '/api/dashboard/setStatus.php',
-        type: 'GET',
-        headers: {
-            'status': 'online'
-        },
-    });
-
-    setInterval(function () {
-        $.ajax({
-            url: '/api/dashboard/setStatus.php',
-            type: 'GET',
-            headers: {
-                'status': 'online'
-            },
-        });
-    }, 120000);
 }
