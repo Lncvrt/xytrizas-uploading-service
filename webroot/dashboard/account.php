@@ -32,11 +32,11 @@ ob_start();
 <div id="container" style="max-width: 48%;">
     <div id="account-information" class="section">
         <h2>Account Information</h2>
-        <p id="username"><strong>Username:</strong> <?php echo $username; ?></p>
-        <p><strong>UID:</strong> <?php echo $uid; ?></p>
-        <p><strong>Discord ID:</strong> <?php echo $discord_id; ?></p>
-        <p><strong>Email:</strong> <em class="blur-on-hover"><?php echo $email; ?></em></p>
-        <p><strong>Role:</strong> <?php echo $role_format; ?></p>
+        <p id="username"><strong>Username:</strong> <span onclick="copyToClipboard('<?php echo $username; ?>', 'Username copied to clipboard', 0);"><?php echo $username; ?></span></p>
+        <p><strong>UID:</strong> <span onclick="copyToClipboard('<?php echo $uid; ?>', 'UID copied to clipboard', 0);"><?php echo $uid; ?></span></p>
+        <p><strong>Discord ID:</strong> <span onclick="copyToClipboard('<?php echo $discord_id; ?>', 'Discord ID copied to clipboard', 0);"><?php echo $discord_id; ?></span></p>
+        <p><strong>Email:</strong> <span class="blur-on-hover" onclick="copyToClipboard('<?php echo $email; ?>', 'Email copied to clipboard', 0);"><?php echo $email; ?></span></p>
+        <p><strong>Role:</strong> <span onclick="copyToClipboard('<?php echo $role_format; ?>', 'Role copied to clipboard', 0);"><?php echo $role_format; ?></span></p>
     </div>
 
     <div class="row">
